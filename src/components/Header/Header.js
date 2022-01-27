@@ -4,7 +4,7 @@ import './Header.css';
 
 function Header() {
   return (
-    <div className='header__container'>
+    <div className='header'>
       <img className='header__logo' src={logo} alt='логотип'/>
       <div className='header__auth-container'>
         <button className='header__auth'>Регистрация</button>
