@@ -1,0 +1,26 @@
+.header__container {
+  display: flex;
+  flex-direction: row;
+  margin: 18px 60px;
+  justify-content: space-between;
+}
+
+.header__auth {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: #073042;
+}
+
+.header__auth_signin {
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  background-color: #2BE080;
+  color: #000000;
+  margin: 0 0 0 30px;
+}
