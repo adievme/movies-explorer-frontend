@@ -13,12 +13,12 @@
   padding-bottom: 23px;
   border-bottom: 1px solid #DADADA;
 }
-.about-project__container {
+.about-project__description {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.about-project__header-text {
+.about-project__description-title {
   color: #ffffff;
   font-weight: 400;
   font-size: 20px;
@@ -27,7 +27,7 @@
   padding: 70px 0 26px 0;
 }
 
-.about-project__text {
+.about-project__description-subtitle {
   color: #ffffff;
   font-weight: 400;
   font-size: 14px;
@@ -35,7 +35,7 @@
   margin: 0;
 }
 
-.about-project__duration-container {
+.about-project__weeks {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -43,7 +43,7 @@
   margin-top: 110px;
 }
 
-.about-project__duration {
+.about-project__weeks-item {
   padding: 9px 0;
   text-align: center;
   font-size: 14px;
@@ -51,19 +51,19 @@
   font-weight: 400;
 }
 
-.about-project__duration_two {
+.about-project__weeks-item_two {
   color: #ffffff;
   grid-column-start: 2;
   grid-column-end: 6;
   background-color:#303030;
 }
 
-.about-project__duration_one {
+.about-project__weeks-item_one {
   color: #000000;
   background-color: #3DDC84;
 }
 
-.about-project__duration-caption {
+.about-project__weeks-caption {
   color: #8B8B8B;
   font-size: 14px;
   line-height: 17px;
@@ -73,7 +73,7 @@
   text-align: center;
 }
 
-.about-project__duration-caption_two {
+.about-project__weeks-caption_two {
   grid-column-start: 2;
   grid-column-end: 6;
 }
