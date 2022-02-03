@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  background-color: #272727;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav__element {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #ffffff;
+  margin: 0 40px 0 0;
+}
+
+.nav__element:last-child {
+  margin: 0;
+}
