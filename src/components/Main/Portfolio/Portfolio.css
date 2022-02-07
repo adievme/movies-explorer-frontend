@@ -1,0 +1,36 @@
+.portfolio {
+  background-color: #202020;
+  padding: 0 70px 125px 70px;
+  margin: auto;
+}
+
+.portfolio__header {
+  color: #8B8B8B;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  margin: 0 0 30px 0;
+}
+
+.portfolio__list-projects {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__link-project {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #424242;
+}
+
+.portfolio__item-project {
+  margin: 20px 0 0 0;
+  padding: 0 0 19px 0;
+  color: #ffffff;
+  font-size: 30px;
+  line-height: 50px;
+  font-weight: 400;
+}

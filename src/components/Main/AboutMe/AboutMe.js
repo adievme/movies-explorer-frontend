@@ -17,10 +17,10 @@ function AboutMe() {
 
           <ul className='about-me__list-contact'>
             <a className='about-me__link' href='https://google.com'>
-              <li className='about-me__item>'>adievme99@yandex.ru</li>
+              <li className='about-me__item>'>GitHub</li>
             </a>
             <a className='about-me__link' href='https://google.com'>
-              <li className='about-me__item>'>GitHub</li>
+              <li className='about-me__item>'>adievme99@yandex.ru</li>
             </a>
           </ul>  
         </div>

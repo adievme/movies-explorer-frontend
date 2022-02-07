@@ -14,8 +14,8 @@ function Main() {
       <NavTab />
       <AboutProject />
       <Techs />
-      <Portfolio />
       <AboutMe />
+      <Portfolio />
     </div>
   );
 }
