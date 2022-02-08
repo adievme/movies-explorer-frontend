@@ -1,8 +1,13 @@
 .header {
   display: flex;
   flex-direction: row;
-  margin: 18px 60px;
+  padding: 19px 70px 0 70px;
   justify-content: space-between;
+  background-color: #073042;
+}
+
+.header__auth-container {
+  align-self: center;
 }
 
 .header__auth {

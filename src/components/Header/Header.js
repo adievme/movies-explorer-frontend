@@ -4,13 +4,13 @@ import './Header.css';
 
 function Header() {
   return (
-    <div className='header'>
+    <section className='header'>
       <img className='header__logo' src={logo} alt='логотип'/>
       <div className='header__auth-container'>
         <button className='header__auth'>Регистрация</button>
         <button className='header__auth header__auth_signin'>Войти</button>
       </div>
-    </div>
+    </section>
   );
 }
   

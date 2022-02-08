@@ -4,14 +4,14 @@
   align-items: center;
   max-width: 730px;
   position: relative;
-  margin: 0 auto;
-  padding: 82px 0 122px 0;
+  margin: 100px auto 122px auto;
 }
 .promo__header {
   position: absolute;
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
+  letter-spacing: -2px;
   color: #ffffff;  
   text-align: center;
 }

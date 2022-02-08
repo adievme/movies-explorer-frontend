@@ -6,12 +6,13 @@
 
 .techs__header {
   color: #ffffff;
-  font-size: 22;
+  font-size: 22px;
   font-weight: 400;
-  line-height: 27px;
+  line-height: 26,63px;
   margin: 0;
   padding-bottom: 23px;
   border-bottom: 1px solid #DADADA;
+  letter-spacing: -1px;
 }
 
 .techs__description {
@@ -26,18 +27,20 @@
   font-size: 50px;
   line-height: 58px;
   font-weight: 400;
-  margin: 0 0 26px 0;
+  margin: 0 0 25px 0;
   text-align: center;
+  letter-spacing: -2px;
 }
 
 .techs__subtitle {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   font-weight: 400;
   margin: 0;
   max-width: 500px;
   text-align: center;
+  max-width: 460px;
 }
 
 .techs__list {

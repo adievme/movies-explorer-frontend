@@ -4,10 +4,10 @@ import logoPromo from '../../../images/praktikum-logo.svg'
 
 function Promo() {
   return (
-    <div className='promo'>
+    <section className='promo'>
       <h1 className='promo__header'>Учебный проект студента факультета Веб-разработки.</h1>
-      <img className='promo__image' src={logoPromo} />
-    </div>
+      <img className='promo__image' src={logoPromo} alt='лого практикум' />
+    </section>
   );
 }
 

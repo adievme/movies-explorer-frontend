@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   background-color: #272727;
+  padding: 9px 0;
 }
 
 .nav__list {
@@ -18,6 +19,8 @@
   line-height: 16px;
   color: #ffffff;
   margin: 0 40px 0 0;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
 }
 
 .nav__element:last-child {
