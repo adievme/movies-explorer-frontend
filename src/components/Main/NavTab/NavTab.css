@@ -22,7 +22,13 @@
   text-decoration: none;
   border-bottom: 1px solid #ffffff;
 }
-
 .nav__element:last-child {
   margin: 0;
+}
+@media screen and (max-width: 321px) {
+  .nav__element {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 24px 0 0;
+  }
 }

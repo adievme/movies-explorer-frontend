@@ -5,6 +5,12 @@
   justify-content: space-between;
   background-color: #073042;
 }
+@media screen and (max-width: 321px) {
+  .header {
+    padding: 18px 14px 0 14px;
+  }
+}
+
 
 .header__auth-container {
   align-self: center;
@@ -20,6 +26,12 @@
   cursor: pointer;
   background-color: #073042;
 }
+@media screen and (max-width: 321px) {
+  .header__auth {
+    font-size: 10px;
+    line-height: 16px;
+  }
+}
 
 .header__auth_signin {
   width: 76px;
@@ -28,4 +40,11 @@
   background-color: #2BE080;
   color: #000000;
   margin: 0 0 0 30px;
+}
+@media screen and (max-width: 321px) {
+  .header__auth_signin {
+    width: 54px;
+    height: 26px;
+    margin: 0 0 0 14px;
+  }
 }

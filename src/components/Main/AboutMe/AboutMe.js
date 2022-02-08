@@ -12,15 +12,16 @@ function AboutMe() {
           <p className='about-me__article'>
             Я из города Казань, учусь в КАИ на факультете информационных технологий и систем. 
             Я увлекаюсь велоспортом и бегом. С 2020 года начал кодить. С 2019 года работаю курьером в Яндекс Еде,
-            и за хорошую работу я и получил курс по веб-разработке в Яндекс Практикуме, чему был очень рад.
+            и за хорошую работу я и получил курс по веб-разработке в Яндекс Практикуме, чему был очень рад. 
+            и т.д и т.п и т.д и т.п и т.д и т.п...
           </p>
 
           <ul className='about-me__list-contact'>
-            <a className='about-me__link' href='https://google.com'>
-              <li className='about-me__item>'>GitHub</li>
+            <a className='about-me__link' href='https://github.com/adievme?tab=repositories'>
+              <li className='about-me__item>'>Github</li>
             </a>
-            <a className='about-me__link' href='https://google.com'>
-              <li className='about-me__item>'>adievme99@yandex.ru</li>
+            <a className='about-me__link' href='mailto:adievme99@yandex.ru'>
+              <li className='about-me__item>'>Почта</li>
             </a>
           </ul>  
         </div>

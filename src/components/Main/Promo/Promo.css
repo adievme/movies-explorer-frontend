@@ -6,6 +6,12 @@
   position: relative;
   margin: 100px auto 122px auto;
 }
+@media screen and (max-width: 321px) {
+  .promo {
+    margin: 160px auto 180px auto;
+  }
+}
+
 .promo__header {
   position: absolute;
   font-weight: 400;
@@ -14,4 +20,17 @@
   letter-spacing: -2px;
   color: #ffffff;  
   text-align: center;
+}
+@media screen and (max-width: 321px) {
+  .promo__header {
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -1px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .promo__image {
+    max-width: 248px;
+  }
 }
