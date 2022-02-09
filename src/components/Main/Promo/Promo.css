@@ -21,7 +21,7 @@
   color: #ffffff;  
   text-align: center;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .promo__header {
     font-size: 31px;
     line-height: 39px;

@@ -12,6 +12,12 @@
   list-style-type: none;
   padding: 0;
 }
+@media screen and (max-width: 426px) {
+  .nav__list {
+    justify-content: space-around;
+    width: 100%;
+  }
+}
 
 .nav__element {
   font-size: 13px;
@@ -25,10 +31,10 @@
 .nav__element:last-child {
   margin: 0;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .nav__element {
     font-size: 11px;
     line-height: 16px;
-    margin: 0 24px 0 0;
+    margin: 0;
   }
 }

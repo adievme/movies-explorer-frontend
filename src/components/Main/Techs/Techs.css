@@ -3,7 +3,7 @@
   padding: 100px 70px;
   margin: auto;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs {
     padding: 60px 18px 70px 18px;
   }
@@ -19,7 +19,7 @@
   border-bottom: 1px solid #DADADA;
   letter-spacing: -1px;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs__header {
     font-size: 18px;
     line-height: 21.78px;
@@ -33,7 +33,7 @@
   flex-direction: column;
   align-items: center;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs__description {
     margin: 60px auto 0 auto;
   }
@@ -48,7 +48,7 @@
   text-align: center;
   letter-spacing: -2px;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs__title {
     font-size: 30px;
     line-height: 36.31px;
@@ -67,7 +67,7 @@
   text-align: center;
   max-width: 460px;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs__subtitle {
     font-size: 11px;
     line-height: 16px;
@@ -82,7 +82,7 @@
   padding: 0;
   margin: 100px 0 0 0;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -106,7 +106,7 @@
   color: #ffffff;
   margin: 0 10px 0 0;
 }
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 426px) {
   .techs__item {
     width: 84px;
     height: 57px;
