@@ -3,7 +3,7 @@
   padding: 110px 70px 100px 70px;
   margin: auto;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .about-me {
     padding: 70px 14px 0 14px;
   }
@@ -19,7 +19,7 @@
   border-bottom: 1px solid #DADADA;
   letter-spacing: -1px;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .about-me__header {
     font-size: 18px;
     line-height: 21.78px;
@@ -33,7 +33,7 @@
   justify-content: space-between;
   margin: 66px 0 0 0;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 647px) {
   .about-me__description {
     flex-direction: column-reverse;
     justify-content: normal;
@@ -43,6 +43,12 @@
 
 .about-me__column {
   max-width: 600px;
+  margin-right: 30px;
+}
+@media screen and (min-width: 426px) and (max-width: 647  px) {
+  .about-me__column {
+    width: 80%
+  }
 }
 
 .about-me__title {
@@ -52,7 +58,7 @@
   color: #ffffff;
   margin: 0;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .about-me__title {
     font-size: 30px;
     line-height: 36.31px;
@@ -67,7 +73,7 @@
   color: #ffffff;
   margin: 18px 0 26px 0;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .about-me__subtitle {
     font-size: 11px;
     line-height: 16px;
@@ -82,7 +88,7 @@
   color: #ffffff;
   margin: 0 0 99px 0;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .about-me__article {
     font-size: 11px;
     line-height: 16px;
@@ -95,6 +101,11 @@
   max-height: 327px;
   object-fit: cover;
   border-radius: 10px;
+}
+@media screen and (max-width: 767px) {
+  .about-me__image {
+    align-self: flex-start;
+  }
 }
 @media screen and (max-width: 426px) {
   .about-me__image {
@@ -118,9 +129,12 @@
   text-decoration: none;
   margin-right: 20px;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .about-me__link {
     margin-right: 26px;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 500;
   }
 }
 

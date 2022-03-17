@@ -6,7 +6,12 @@
   position: relative;
   margin: 100px auto 122px auto;
 }
-@media screen and (max-width: 321px) {
+@media screen and (min-width: 767px) {
+  .promo {
+    margin: 242px auto 240px auto;
+  }
+}
+@media screen and (max-width: 426px) {
   .promo {
     margin: 160px auto 180px auto;
   }
@@ -21,15 +26,20 @@
   color: #ffffff;  
   text-align: center;
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 767px) {
   .promo__header {
     font-size: 31px;
     line-height: 39px;
     letter-spacing: -1px;
   }
 }
+@media screen and (max-width: 426px) {
+  .promo__header {
+    max-width: 300px;
+  }
+}
 
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 767px) {
   .promo__image {
     max-width: 248px;
   }
