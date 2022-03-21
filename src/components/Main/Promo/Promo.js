@@ -5,8 +5,10 @@ import logoPromo from '../../../images/praktikum-logo.svg'
 function Promo() {
   return (
     <section className='promo'>
-      <h1 className='promo__header'>Учебный проект студента факультета Веб-разработки.</h1>
-      <img className='promo__image' src={logoPromo} alt='лого практикум' />
+      <div className='promo__content'>
+        <h1 className='promo__header'>Учебный проект студента факультета Веб-разработки.</h1>
+        <img className='promo__image' src={logoPromo} alt='лого практикум' />
+      </div>
     </section>
   );
 }

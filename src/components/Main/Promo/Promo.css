@@ -1,20 +1,26 @@
 .promo {
+  padding: 100px 0 122px 0;
+  background-color: #073042;
+  width: 100%;
+}
+@media screen and (min-width: 767px) {
+  .promo {
+    padding: 242px auto 240px auto;
+  }
+}
+@media screen and (max-width: 426px) {
+  .promo {
+    padding: 160px auto 180px auto;
+  }
+}
+
+.promo__content {
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 730px;
   position: relative;
-  margin: 100px auto 122px auto;
-}
-@media screen and (min-width: 767px) {
-  .promo {
-    margin: 242px auto 240px auto;
-  }
-}
-@media screen and (max-width: 426px) {
-  .promo {
-    margin: 160px auto 180px auto;
-  }
+  margin: auto;
 }
 
 .promo__header {
