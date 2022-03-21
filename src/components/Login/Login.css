@@ -4,10 +4,27 @@
   justify-content: center;
   background-color: #202020;
 }
+@media screen and (max-width: 769px) {
+  .auth {
+    padding: 232px 0 232px 0;
+  }
+}
+@media screen and (max-width: 520px) {
+  .auth {
+    padding: 56px 30px 30px 30px;
+  }
+}
 
 .auth__container {
   max-width: 396px;
   width: 100%;
+}
+
+@media screen and (max-width: 520px) {
+  .auth__logo {
+    display: flex;
+    margin: auto;
+  }
 }
 
 .auth__title {
@@ -16,6 +33,12 @@
   line-height: 29px;
   font-weight: 500;
   margin: 36px 0 41px 0;
+}
+@media screen and (max-width: 520px) {
+  .auth__title {
+    text-align: center;
+    margin: 50px 0 80px 0;
+  }
 }
 
 .auth__form {
@@ -54,9 +77,19 @@
   line-height: 17px;
   font-weight: 400;
 }
+@media screen and (max-width: 520px) {
+  .auth__button {
+    margin: 267px 0 14px 0;
+  }
+}
 
 .auth__button_register {
   margin: 61px 0 16px 0;
+}
+@media screen and (max-width: 520px) {
+  .auth__button_register {
+    margin: 157px 0 14px 0;
+  }
 }
 
 .auth__signature {
