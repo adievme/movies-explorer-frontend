@@ -11,16 +11,6 @@
   margin: auto;
   padding: 19px 70px 0 70px;
 }
-@media screen and (min-width: 767px) {
-  .header__content {
-    padding: 18px 30px 0 30px;
-  }
-}
-@media screen and (max-width: 767px) {
-  .header__content {
-    padding: 18px 14px 0 14px;
-  }
-}
 
 .header__auth-container {
   align-self: center;
@@ -35,12 +25,7 @@
   padding: 0;
   cursor: pointer;
   background-color: #073042;
-}
-@media screen and (max-width: 426px) {
-  .header__auth {
-    font-size: 10px;
-    line-height: 16px;
-  }
+  text-decoration: none;
 }
 
 .header__auth_signin {
@@ -50,11 +35,30 @@
   background-color: #2BE080;
   color: #000000;
   margin: 0 0 0 30px;
+  padding: 8px 20px;
 }
+
+@media screen and (min-width: 767px) {
+  .header__content {
+    padding: 18px 30px 0 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__content {
+    padding: 18px 14px 0 14px;
+  }
+}
+
 @media screen and (max-width: 426px) {
   .header__auth_signin {
     width: 54px;
     height: 26px;
     margin: 0 0 0 14px;
+  }
+
+  .header__auth {
+    font-size: 10px;
+    line-height: 16px;
   }
 }

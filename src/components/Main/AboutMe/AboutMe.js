@@ -21,8 +21,8 @@ function AboutMe() {
               <a className='about-me__link' href='https://github.com/adievme?tab=repositories'>
                 <li className='about-me__item>'>Github</li>
               </a>
-              <a className='about-me__link' href='mailto:adievme99@yandex.ru'>
-                <li className='about-me__item>'>Почта</li>
+              <a className='about-me__link' href='https://t.me/Adievme'>
+                <li className='about-me__item>'>Telegram</li>
               </a>
             </ul>  
           </div>

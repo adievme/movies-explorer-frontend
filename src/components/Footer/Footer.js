@@ -15,8 +15,8 @@ function Footer() {
             <a className='footer__link' href='https://github.com/adievme?tab=repositories'>
               <li className='footer__item footer__text'>Github</li>
             </a>
-            <a className='footer__link' href='mailto:adievme99@yandex.ru'>
-              <li className='footer__item footer__text'>Почта</li>
+            <a className='footer__link' href='https://t.me/Adievme'>
+              <li className='footer__item footer__text'>Telegram</li>
             </a>
           </ul>
         </div>

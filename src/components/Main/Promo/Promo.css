@@ -3,16 +3,6 @@
   background-color: #073042;
   width: 100%;
 }
-@media screen and (min-width: 767px) {
-  .promo {
-    padding: 242px auto 240px auto;
-  }
-}
-@media screen and (max-width: 426px) {
-  .promo {
-    padding: 160px auto 180px auto;
-  }
-}
 
 .promo__content {
   display: flex;
@@ -32,21 +22,31 @@
   color: #ffffff;  
   text-align: center;
 }
+
+@media screen and (min-width: 767px) {
+  .promo {
+    padding: 242px auto 240px auto;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .promo__header {
     font-size: 31px;
     line-height: 39px;
     letter-spacing: -1px;
   }
+
+  .promo__image {
+    max-width: 248px;
+  }
 }
+
 @media screen and (max-width: 426px) {
   .promo__header {
     max-width: 300px;
   }
-}
 
-@media screen and (max-width: 767px) {
-  .promo__image {
-    max-width: 248px;
+  .promo {
+    padding: 160px auto 180px auto;
   }
 }
