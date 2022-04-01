@@ -6,7 +6,7 @@
 .about-project__content {
   max-width: 1140px;
   margin: auto;
-  padding: 110px 0;
+  padding: 110px 0 110px 0;
 }
 
 .about-project__header {
@@ -26,37 +26,29 @@
   justify-content: space-between;
 }
 
-.about-project__columns {
+.about-project__description-columns {
   max-width: 550px;
 }
 
 .about-project__description-title {
   color: #ffffff;
   font-weight: 400;
-  font-size: 19px;
+  font-size: 18.5px;
   line-height: 25px;
   margin: 0;
   padding: 70px 0 26px 0;
 }
 
-.about-project__description-subtitle {
-  color: #ffffff;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  margin: 0;
-}
-
 .about-project__weeks {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   justify-items: stretch;
-  margin-top: 110px;
+  margin-top: 109.6px;
+  row-gap: 14px;
 }
 
 .about-project__weeks-item {
-  padding: 9px 0;
+  padding: 9.5px 0;
   text-align: center;
   font-size: 14px;
   line-height: 17px;
@@ -82,6 +74,7 @@
   font-weight: 500;
   margin: 0;
   text-align: center;
+  height: 17px;
 }
 
 .about-project__weeks-caption_two {
@@ -91,10 +84,29 @@
 
 @media screen and (min-width: 767px) and (max-width: 1240px) {
   .about-project__content {
-    padding: 90px 0;
+    padding: 90.19px 0;
     margin: 0 50px;
   }
+
+  .about-project__description-columns {
+    margin-right: 37px;
+  }
+  .about-project__description-columns:last-child {
+    margin: 0;
+  }
+
+  .about-project__description-title {
+    font-size: 20px;
+    line-height: 24.2px;
+    padding: 70px 0 22px 0;
+    letter-spacing: -.8px;
+  }
+
+  .about-project__weeks {
+    margin-top: 93px;
+  }
 }
+
 @media screen and (max-width: 767px) {
   .about-project__content {
     padding: 70px 0;
@@ -115,18 +127,14 @@
   .about-project__description-title {
     font-size: 18px;
     line-height: 21.78px;
-    padding: 60px 0 13px 0;
-    letter-spacing: -1px;
-  }
-
-  .about-project__description-subtitle {
-    font-size: 11px;
-    line-height: 16px;
+    padding: 60px 0 16px 0;
+    letter-spacing: -0.75px;
   }
 
   .about-project__weeks {
-    margin-top: 64px;
+    margin-top: 59px;
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 10px;
   }
 
   .about-project__weeks-item {
@@ -143,34 +151,10 @@
   .about-project__weeks-caption {
     font-size: 11px;
     line-height: 12.74px;
-    padding-top: 10px;
   }
 
   .about-project__weeks-caption_two {
     grid-column-start: 2;
     grid-column-end: 4;
-  }
-}
-
-@media screen and (min-width: 767px) {
-  .about-project__columns {
-    margin-right: 30px;
-  }
-  .about-project__columns:last-child {
-    margin: 0;
-  }
-
-  .about-project__description-title {
-    font-size: 20px;
-    line-height: 24.2px;
-    padding: 70px 0 19px 0;
-  }
-
-  .about-project__weeks {
-    margin-top: 90px;
-  }
-  
-  .about-project__weeks-caption {
-    padding-top: 14px;
   }
 }

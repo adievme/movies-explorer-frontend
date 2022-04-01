@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import '../Login/Login.css';
+import './Register.css';
 
 function Register() {
   return (
@@ -24,10 +25,10 @@ function Register() {
           />
           <span className='auth__signature'>Пароль</span>
           <input 
-            className="auth__input" 
+            className="auth__input auth__input_register-margin" 
             type="password" 
           />
-          <span className='auth__signature auth__signature_error'></span>
+          <span className='auth__signature auth__signature_error'>Что-то пошло не так...</span>
           <button className="auth__button auth__button_register">Зарегистрироваться</button>
         </form>
         <p className="auth__caption">Уже зарегистрированы? <Link className="auth__caption auth__caption_link" to="/signin">Войти</Link></p>

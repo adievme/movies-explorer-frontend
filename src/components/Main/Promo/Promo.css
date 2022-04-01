@@ -1,5 +1,5 @@
 .promo {
-  padding: 100px 0 122px 0;
+  padding: 82px 0 122px 0;
   background-color: #073042;
   width: 100%;
 }
@@ -23,30 +23,29 @@
   text-align: center;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (max-width: 769px) {
   .promo {
-    padding: 242px auto 240px auto;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .promo__header {
-    font-size: 31px;
-    line-height: 39px;
-    letter-spacing: -1px;
+    padding: 224px 0 240px 0;
   }
 
   .promo__image {
-    max-width: 248px;
+    max-width: 320px;
   }
 }
 
 @media screen and (max-width: 426px) {
+  .promo {
+    padding: 142px 0 180px 0;
+  }
+
   .promo__header {
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -1px;
     max-width: 300px;
   }
 
-  .promo {
-    padding: 160px auto 180px auto;
+  .promo__image {
+    max-width: 248px;
   }
 }

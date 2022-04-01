@@ -24,7 +24,7 @@
 }
 
 .auth__input {
-  margin: 0 0 20px 0;
+  margin: 10px 0 20px 0;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
@@ -42,9 +42,13 @@
   outline: none;
 }
 
+.auth__input_margin {
+  margin: 10px 0 0 0;
+}
+
 .auth__button {
-  margin: 159px 0 16px 0;
-  padding: 13px 0 13px 0;
+  margin: 178px 0 16px 0;
+  padding: 15px 0;
   background-color: #4285F4;
   border-radius: 3px;
   width: 100%;
@@ -56,7 +60,7 @@
 }
 
 .auth__button_register {
-  margin: 61px 0 16px 0;
+  margin: 69px 0 16px 0;
 }
 
 .auth__signature {
@@ -64,7 +68,7 @@
   font-size: 10px;
   line-height: 12px;
   font-weight: 400;
-  margin: 0 0 10px 0;
+  margin: 0;
 }
 
 .auth__caption {
@@ -108,5 +112,15 @@
 
   .auth__button_register {
     margin: 157px 0 14px 0;
+  }
+
+  .auth__caption {
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+
+  .auth__button {
+    font-size: 12px;
+    line-height: 14.52px;
   }
 }

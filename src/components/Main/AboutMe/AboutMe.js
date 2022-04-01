@@ -1,20 +1,19 @@
 import React from 'react';
 import './AboutMe.css';
+import '../Main.css';
 
 function AboutMe() {
   return (
     <section className='about-me' id='about-me'>
       <div className='about-me__content'>
-        <h2 className='about-me__header'>Студент</h2>
+        <h2 className='main-header'>Студент</h2>
         <div className='about-me__description'>
           <div className='about-me__column'>
             <h2 className='about-me__title'>Инсаф</h2>
             <h3 className='about-me__subtitle'>Фронтенд-разработчик, 21 год</h3>
-            <p className='about-me__article'>
+            <p className='paragraph about-me__article'>
               текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, 
               текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, 
-              текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, 
-              текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать, текст, который нужно придумать
             </p>
 
             <ul className='about-me__list-contact'>

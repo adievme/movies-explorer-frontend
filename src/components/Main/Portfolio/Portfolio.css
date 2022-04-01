@@ -49,6 +49,17 @@
   padding: 0 6px 12px 0;
 }
 
+@media screen and (min-width: 767px) and (max-width: 1240px) {
+  .portfolio {
+    padding: 0 50px 90px 50px;
+  }
+
+  .portfolio__item-project {
+    letter-spacing: -1px;
+    padding: 0 0 20px 0;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .portfolio {
     padding: 69px 14px 70px 14px;

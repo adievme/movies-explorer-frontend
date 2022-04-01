@@ -9,11 +9,17 @@
   justify-content: space-between;
   max-width: 1140px;
   margin: auto;
-  padding: 19px 70px 0 70px;
+  padding: 18px 70px 18px 70px;
+}
+
+.header__logo:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 .header__auth-container {
   align-self: center;
+  margin: 0 0 1.25px 0;
 }
 
 .header__auth {
@@ -28,32 +34,33 @@
   text-decoration: none;
 }
 
+.header__auth:hover {
+  opacity: .6;
+}
+
 .header__auth_signin {
-  width: 76px;
-  height: 32px;
   border-radius: 3px;
   background-color: #2BE080;
   color: #000000;
   margin: 0 0 0 30px;
-  padding: 8px 20px;
+  padding: 8.4px 20.22px;
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 767px) and (max-width: 1279px) {
   .header__content {
-    padding: 18px 30px 0 30px;
+    padding: 18px 30px 18px 30px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .header__content {
-    padding: 18px 14px 0 14px;
+    padding: 18px 14px;
   }
 }
 
 @media screen and (max-width: 426px) {
   .header__auth_signin {
-    width: 54px;
-    height: 26px;
+    padding: 7px 12px;
     margin: 0 0 0 14px;
   }
 

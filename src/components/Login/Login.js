@@ -19,7 +19,7 @@ function Login() {
           />
           <span className='auth__signature'>Пароль</span>
           <input 
-            className="auth__input" 
+            className="auth__input auth__input_margin" 
             type="password" 
           />
           <button className="auth__button">Войти</button>
