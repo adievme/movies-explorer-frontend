@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile.js';
 import Navigation from '../Navigation/Navigation.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js';
 import Movies from '../Movies/Movies.js';
+import SavedMovies from '../SavedMovies/SavedMovies.js'
 import MenuPopap from '../MenuPopap/MenuPopap.js';
 
 // import Preloader from '../Movies/Preloader/Preloader.js';
@@ -47,7 +48,7 @@ function App() {
         </Route>
         <Route path="/saved-movies">
           <Navigation onMenuPopap={handleOpenMenuPopap} />
-          <Movies />
+          <SavedMovies />
         </Route>
 
         <Route path='/profile'>

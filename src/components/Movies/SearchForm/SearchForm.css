@@ -34,8 +34,8 @@
 }
 
 .search-form__button {
-  width: 34px;
-  height: 34px;
+  width: 33px;
+  height: 33px;
   background-image: url("../../../images/search.svg");
   background-size: cover;
   background-color: transparent;
@@ -43,6 +43,10 @@
   padding: 0;
   border: none;
   outline: none;
+}
+
+.search-form__button:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 769px) {
