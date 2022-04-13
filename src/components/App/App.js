@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer.js';
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
@@ -13,9 +13,68 @@ import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js'
 import MenuPopap from '../MenuPopap/MenuPopap.js';
 
+import * as auth from '../../utils/auth';
+
 // import Preloader from '../Movies/Preloader/Preloader.js';
 
 function App() {
+  const history = useHistory();
+
+  const [userData, setUserData] = useState({});
+
+  const onRegister = ({ email, name, password }) => {
+    return auth.register(email, name, password)
+      .then(res => res)
+      .catch(err => console.log(err));
+  };
+
+  const onLogin = ({ email, password }) => {
+    return auth.authorize(email, password)
+      .then((res) => {
+        // Если токен валидный, то сохраняем его в localStorage, вызываем ф-ю authorize для получения email и выполняем вход
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          authorize(res.token)
+          // setLoggedIn(true);
+
+          history.push('/profile')
+
+          return res
+        } else {
+          return res
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  const authorize = (jwt) => {
+    return auth.getContent(jwt)
+      .then((res) => {
+        if (res) {
+          // setLoggedIn(true);
+          setUserData(res)
+          
+          // history.push('/lenta')
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  function onSignOut() {
+    localStorage.removeItem('jwt')
+
+    setUserData({})
+
+    // setLoggedIn(false)
+    // setUserEmail('')
+    // setIsMenuClick(false)
+    // setToken('')
+    // console.log(token)
+
+    history.push('/signin')
+  }
+
+
   const [isOpenMenuPopap, setIsOpenMenuPopap] = useState(false)
 
   function handleOpenMenuPopap() {
@@ -36,10 +95,10 @@ function App() {
         </Route>
 
         <Route path="/signin">
-          <Login />
+          <Login onLogin={onLogin} />
         </Route>
         <Route path="/signup">
-          <Register />
+          <Register onRegister={onRegister} />
         </Route>
 
         <Route path="/movies">
@@ -53,7 +112,7 @@ function App() {
 
         <Route path='/profile'>
           <Navigation onMenuPopap={handleOpenMenuPopap} />
-          <Profile />
+          <Profile onSignOut={onSignOut} userData={userData} />
         </Route>
 
         <Route path='*'>
