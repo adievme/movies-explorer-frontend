@@ -1,0 +1,30 @@
+.element__like-wrapper {
+  display: flex;
+  align-items: start;
+}
+
+.element__delete {
+  width: 8px;
+  height: 8px;
+  background-image: url("../../../images/delete-card.svg");
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 3px 11px 0 0;
+  border: none;
+  outline: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .element__delete {
+    visibility: hidden;
+    width: 10px;
+    height: 10px;
+  }
+
+  .element__item:hover .element__delete {
+    visibility: visible;
+  }
+}
+
