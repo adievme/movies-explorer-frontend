@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer.js';
 import Header from '../Header/Header.js';
@@ -17,6 +17,7 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { authApi } from '../../utils/AuthApi.js';
 import { mainApi } from '../../utils/MainApi.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import EditProfilePopap from '../EditProfilePopap/EditProfilePopap.js';
 
 // import Preloader from '../Movies/Preloader/Preloader.js';
 
@@ -28,6 +29,7 @@ function App() {
   const token = localStorage.getItem('token');
 
   const [isOpenMenuPopap, setIsOpenMenuPopap] = useState(false);
+  const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
 
   function handleTokenCheck() {
     authApi.checkToken(token)
@@ -87,13 +89,39 @@ function App() {
     }
   }, [loggedIn]);
 
+  function handleUpdateUser(dataUser) {
+    mainApi.setUserInfo(dataUser, token)
+      .then((res) => {
+        setCurrentUser(res)
+        closeAllPopups()
+      })
+      .catch(err => console.log(err))
+  }
+
   function handleOpenMenuPopap() {
     setIsOpenMenuPopap(true)
   }
 
-  function closeMenuPopap() {
-    setIsOpenMenuPopap(false)
+  function handleEditProfileClick() {
+    setIsEditPopupOpen(true)
   }
+
+  function closeAllPopups() {
+    setIsOpenMenuPopap(false)
+    setIsEditPopupOpen(false)
+  }
+
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+
+    document.addEventListener('keydown', closeByEscape)
+    
+    return () => document.removeEventListener('keydown', closeByEscape)
+  }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -105,7 +133,7 @@ function App() {
           </Route>
 
           <Navigation onMenuPopap={handleOpenMenuPopap}/>
-
+          <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <Switch>
           
           <Route path="/signin">
@@ -133,6 +161,7 @@ function App() {
             component={Profile}
             loggedIn={loggedIn}
             onLogout={onLogout}
+            onEditButton={handleEditProfileClick}
           />
 
           <Route path='*'>
@@ -140,7 +169,7 @@ function App() {
           </Route>
         </Switch>
         {/* <Preloader /> */}
-        <MenuPopap isOpen={isOpenMenuPopap} onClose={closeMenuPopap} />
+        <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
   );

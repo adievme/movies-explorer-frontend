@@ -58,6 +58,7 @@
   font-weight: 400;
   background-color: #202020;
   border: none;
+  outline: none;
 }
 
 .profile__edit:hover {

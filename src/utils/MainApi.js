@@ -15,12 +15,13 @@ class MainApi {
     .then(this._verifyResolve);
   }
 
-  setUserInfo(data) {
+  setUserInfo(data, token) {
     return fetch(`${this._adress}/users/me`, {
       method: "PATCH",
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
         name: data.name,
