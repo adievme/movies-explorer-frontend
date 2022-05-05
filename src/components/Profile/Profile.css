@@ -60,6 +60,10 @@
   border: none;
 }
 
+.profile__edit:hover {
+  opacity: .6;
+}
+
 .profile__edit_color {
   color: #EE3465;
   font-weight: 500;

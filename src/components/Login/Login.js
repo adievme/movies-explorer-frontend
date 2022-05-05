@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import './Login.css';
 
@@ -18,16 +18,8 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     onLogin({ email, password })
-      .then(res => {
-        // Если есть ошибка то открываем попап с ошибкой, иначе авторизуемся
-        if (res.message) {
-          console.log(res.message)
-        } else {
-          history.push('/profile')
-        }
-      })
-      .then(resetForm)
-  };  
+  };
+
   return (
     <section className="auth">
       <div className="auth__container">

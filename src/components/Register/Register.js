@@ -1,34 +1,31 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import '../Login/Login.css';
 import './Register.css';
 
 function Register({ onRegister }) {
-  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const history = useHistory();
   
   const resetForm = () => {
-    setEmail('');
     setName('');
+    setEmail('');
     setPassword('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onRegister({ email, name, password })
-      .then(res => {
-        if (!res.message) {
-          history.push('/signin')
-        }
-      })
-      .then(resetForm)
-  };
+    onRegister({ name, email, password })
 
+    history.push("/movies")
+
+    resetForm();
+  };
   return (
     <section className="auth">
       <div className="auth__container">
@@ -54,9 +51,9 @@ function Register({ onRegister }) {
           <span className='auth__signature'>Пароль</span>
           <input 
             className="auth__input auth__input_register-margin" 
-            type="password" 
+            type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)} 
           />
           <span className='auth__signature auth__signature_error'>Что-то пошло не так...</span>
           <button className="auth__button auth__button_register" type="submit">Зарегистрироваться</button>
