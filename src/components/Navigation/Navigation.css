@@ -1,3 +1,7 @@
+.navigation_color {
+  background-color: #073042;
+}
+
 .navigation__content {
   margin: 0 70px;
   padding: 18px 0;
@@ -57,7 +61,7 @@
 
 .navigation__icon {
   padding: 8px;
-  background-color: #313131;
+  background-color: none;
   border-radius: 4px;
 }
 

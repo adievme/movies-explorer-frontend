@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import Footer from '../Footer/Footer.js';
-import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
 import './App.css';
 import Profile from '../Profile/Profile.js';
-import Navigation from '../Navigation/Navigation.js';
 import PageNotFound from '../PageNotFound/PageNotFound.js';
 import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js'
 import MenuPopap from '../MenuPopap/MenuPopap.js';
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-// import { LoggedInContext } from "../../context/LoggedInContext";
 import { authApi } from '../../utils/AuthApi.js';
 import { mainApi } from '../../utils/MainApi.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -126,14 +123,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-          <Route exact path='/'>
-            <Header />
-            <Main />
-            <Footer />
-          </Route>
+        <Route exact path='/'>
+          <Main loggedIn={loggedIn} onMenuPopup={handleOpenMenuPopap}/>
+        </Route>
 
-          <Navigation onMenuPopap={handleOpenMenuPopap}/>
-          <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <Switch>
           
           <Route path="/signin">
@@ -148,12 +142,14 @@ function App() {
             path="/movies"
             component={Movies}
             loggedIn={loggedIn}
+            onMenuPopup={handleOpenMenuPopap}
           />
 
           <ProtectedRoute 
             path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
+            onMenuPopup={handleOpenMenuPopap}
           />
 
           <ProtectedRoute 
@@ -162,12 +158,15 @@ function App() {
             loggedIn={loggedIn}
             onLogout={onLogout}
             onEditButton={handleEditProfileClick}
+            onMenuPopup={handleOpenMenuPopap}
           />
 
           <Route path='*'>
             <PageNotFound />
           </Route>
         </Switch>
+
+        <Footer />
         {/* <Preloader /> */}
         <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>

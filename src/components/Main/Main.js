@@ -6,10 +6,12 @@ import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import Portfolio from './Portfolio/Portfolio';
 import AboutMe from './AboutMe/AboutMe';
+import Header from '../Header/Header';
 
-function Main() {
+function Main({ loggedIn, onMenuPopap }) {
   return (
     <main className='main'>
+      <Header loggedIn={loggedIn} onMenuPopup={onMenuPopap} />
       <Promo />
       <NavTab />
       <AboutProject />
