@@ -166,7 +166,7 @@ function App() {
           </Route>
         </Switch>
 
-        <Footer />
+        {/* <Footer /> */}
         {/* <Preloader /> */}
         <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>
