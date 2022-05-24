@@ -5,7 +5,9 @@ import Footer from '../Footer/Footer.js';
 import Navigation from "../Navigation/Navigation";
 import { moviesApi } from '../../utils/MoviesApi';
 
-function Movies({ onMenuPopup, loggedIn }) {
+function Movies({ onMenuPopup, loggedIn, onLikeButtonClick, isSavedMovie }) {
+  // const [isOpenPreloader, setIsOpenPreloader] = useState(false)
+
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -42,12 +44,16 @@ function Movies({ onMenuPopup, loggedIn }) {
     updateShort(JSON.parse(localStorage.getItem('short') || 'false'));
 
     if (!movies.length) {
-      moviesApi.getMovies().then(movies => {
-        updateMovies(movies);
-        updateFilteredMovies(movies);
-      });
+      // setIsOpenPreloader(true)
+      moviesApi.getMovies()
+        .then(movies => {
+          updateMovies(movies);
+          updateFilteredMovies(movies);
+        })
+        // .catch((err) => console.log(err))
+        // .finally(() => setIsOpenPreloader(false));
     } 
-  }, []);
+  }, [query]);
 
   return (
     <section className='movies'>
@@ -60,7 +66,12 @@ function Movies({ onMenuPopup, loggedIn }) {
         updateFilteredMovies = {updateFilteredMovies}
         updateQuery={updateQuery}
       />
-      <MoviesCardList filteredMovies={filteredMovies} short={short} />
+      <MoviesCardList 
+        filteredMovies={filteredMovies} 
+        short={short} 
+        onLikeButtonClick={onLikeButtonClick} 
+        isSavedMovie={isSavedMovie}
+      />
       <Footer />
     </section>
   );

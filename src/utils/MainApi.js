@@ -31,40 +31,49 @@ class MainApi {
     .then(this._verifyResolve);
   }
 
-  getMovies() {
+  getMovies(token) {
     return fetch(`${this._adress}/movies`, {
       credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
     })
     .then(this._verifyResolve);
   }
 
-  addMovie(data) {
+  addMovie(data, token) {
     return fetch(`${this._adress}/movies`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
-        country: data.country || " ",
-        director: data.director || " ",
+        country: data.country || "Россия",
+        director: data.director || "Россия",
         duration: data.duration || 0,
-        year: data.year || " ",
-        description: data.description || " ",
-        image: `https://api.nomoreparties.co/${data.image.url}`,
+        year: data.year || "2000",
+        description: "Описание" || "Штыфа",
+        image: `https://api.nomoreparties.co${data.image.url}`,
         trailer: data.trailerLink,
-        thumbnail: `https://api.nomoreparties.co/${data.image.url}`,
+        thumbnail: `https://api.nomoreparties.co${data.image.url}`,
         movieId: `${data.id}`,
-        nameRU: data.nameRU || " ",
-        nameEN: data.nameEN || " ",
+        nameRU: data.nameRU || "Росссия",
+        nameEN: "USA111" || "Россия",
       }),
     }).then(this._verifyResolve);
   }
 
-  deleteMovie(movieId) {
+  deleteMovie(movieId, token) {
     return fetch(`${this._adress}/movies/${movieId}`, {
       method: "DELETE",
       credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
     })
     .then(this._verifyResolve);
   }

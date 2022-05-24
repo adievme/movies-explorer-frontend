@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
-import foto from '../../../images/foto.jpg';
 
-function MoviesCard({ movie }) {
-  // console.log(movie) 
-  const [like, setLike] = React.useState(false)
+function MoviesCard({ movie, onLikeButtonClick, handleDeleteMovie, isSavedMovie }) {
 
-  function handleLike() {
-    if (like) {
-      setLike(false)
-    } else {
-      setLike(true)
-    }
+  function handleToggleLikeMovie() {
+    onLikeButtonClick(movie)
   }
 
+  const isSavedMovieStatus = isSavedMovie(movie)
+
   const CardLikeClassName = (
-    `element__like ${like && 'element__like_active'}`
+    `element__like ${isSavedMovieStatus && 'element__like_active'}`
   );
+  // console.log(isSavedMovie)
 
   return (
     <li className="element__item">
@@ -29,7 +25,7 @@ function MoviesCard({ movie }) {
           <p className="element__duration">{movie.duration} мин</p>
         </div>
         <div className="element__like-wrapper">
-          <button className={CardLikeClassName} onClick={handleLike} />
+          <button className={CardLikeClassName} onClick={handleToggleLikeMovie} />
         </div>
       </div>
     </li>

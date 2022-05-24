@@ -2,28 +2,19 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css';
 import useWindowSize from '../../../hooks/useWindowSize';
+import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({ filteredMovies, short }) {
+function MoviesCardList({ filteredMovies, short, onLikeButtonClick, isSavedMovie }) {
+
   const windowSize = useWindowSize();
 
   const [maxCards, setMaxCards] = React.useState(0);
   const [loadCards, setLoadCards] = React.useState(0);
   const [maxCardsAfterLoad, setMaxCardsAfterLoad] = React.useState(0);
 
-  // const [isVisibilityButtonMore, setIsVisibilityButtonMore] = React.useState(false);
-
   function handleCardsLoaderClick() {
     setMaxCardsAfterLoad(maxCardsAfterLoad + loadCards);
   }
-
-  // function handleVisibilityButtonMore() {
-  //   if (filteredMovies.length <= maxCardsAfterLoad) {
-  //     setIsVisibilityButtonMore(true)
-  //   } else {
-  //     setIsVisibilityButtonMore(false)
-  //   }
-  // }
-  // console.log(maxCardsAfterLoad, isVisibilityButtonMore)
 
   React.useEffect(() => {
     setMaxCards(windowSize > 1023 ? 12 : windowSize > 767 ? 8 : 5);
@@ -31,17 +22,21 @@ function MoviesCardList({ filteredMovies, short }) {
     setMaxCardsAfterLoad(maxCards);
   }, [windowSize, maxCards]);
 
-  // React.useEffect(() => {
-  //   handleVisibilityButtonMore();
-  // }, [maxCardsAfterLoad])
-
   return (
     <section className="elements">
       <ul className="elements__list">
+        {/* <Preloader isOpen={isOpenPreloader} /> */}
         {filteredMovies
           .filter(movie => !short || movie.duration <= 40)
           .slice(0, maxCardsAfterLoad)
-          .map(movie => <MoviesCard key={movie.id} movie={movie} />)
+          .map((movie) => {
+            return <MoviesCard 
+              key={movie.id} 
+              movie={movie} 
+              onLikeButtonClick={onLikeButtonClick}
+              isSavedMovie={isSavedMovie}
+            />
+          })
         }
       </ul>
       {filteredMovies.length >= maxCardsAfterLoad && 

@@ -16,9 +16,10 @@ import { mainApi } from '../../utils/MainApi.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import EditProfilePopap from '../EditProfilePopap/EditProfilePopap.js';
 
-// import Preloader from '../Movies/Preloader/Preloader.js';
+import Preloader from '../Movies/Preloader/Preloader.js';
 
 function App() {
+  // localStorage.clear()
   const history = useHistory()
 
   const [currentUser, setCurrentUser] = useState({})
@@ -52,7 +53,6 @@ function App() {
   }
 
   const onRegister = ({ name, email, password }) => {
-    // setIsOpenPreloader(true);
     authApi.register(name, email, password)
       .then((res) => {
         if (res.statusCode !== 400) {
@@ -60,7 +60,6 @@ function App() {
         }
       })
       .catch((err) => console.log(err))
-      // .finally(() => setIsOpenPreloader(false));
   }
 
   function onLogout() {
@@ -71,7 +70,6 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-    console.log(loggedIn)
   }, []);
 
   React.useEffect(() => {
@@ -93,6 +91,56 @@ function App() {
         closeAllPopups()
       })
       .catch(err => console.log(err))
+  }
+  const [savedMovies, setSavedMovies] = useState([])
+
+  // function handleSearchSavedMovies(dataSearch) {
+  //   // setIsOpenPreloader(true);
+
+  //   const savedMoviesInLocalStorage = JSON.parse(localStorage.savedMovies);
+  //   const savedMoviesFilter = filterMovies(
+  //     savedMoviesInLocalStorage,
+  //     dataSearch
+  //   );
+  //   setSavedMovies(savedMoviesFilter);
+  //   setStatusSearchMovies(savedMoviesFilter, setIsSuccessSearchSavedMovie);
+
+  //   setIsOpenPreloader(false);
+  // }
+
+
+  function setStatusMovie(dataMovie) {
+    const isSavedMovie = savedMovies.some((i) => i.movieId === dataMovie.id);
+    return isSavedMovie;
+  }
+
+  function toggleLikeMovie(dataMovie) {
+    const isSavedMovie = savedMovies.some((i) => i.movieId === dataMovie.id);
+    if (isSavedMovie) {
+      const savedMovie = savedMovies.find((i) => i.movieId === dataMovie.id);
+      handleDeleteMovie(savedMovie);
+    }
+    if (!isSavedMovie) {
+      handleSaveMovie(dataMovie);
+    }
+  }
+
+  function handleSaveMovie(dataMovie) {
+    mainApi
+      .addMovie(dataMovie, token)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleDeleteMovie(movie) {
+    mainApi
+      .deleteMovie(movie._id, token)
+      .then(() => {
+        setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleOpenMenuPopap() {
@@ -129,7 +177,6 @@ function App() {
 
         <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <Switch>
-          
           <Route path="/signin">
             <Login onLogin={onLogin}/>
           </Route>
@@ -143,6 +190,8 @@ function App() {
             component={Movies}
             loggedIn={loggedIn}
             onMenuPopup={handleOpenMenuPopap}
+            onLikeButtonClick={toggleLikeMovie}
+            isSavedMovie={setStatusMovie}
           />
 
           <ProtectedRoute 
@@ -150,6 +199,10 @@ function App() {
             component={SavedMovies}
             loggedIn={loggedIn}
             onMenuPopup={handleOpenMenuPopap}
+            savedMovies={savedMovies}
+            setSavedMovies={setSavedMovies}
+            token={token}
+            onDeleteMovie={handleDeleteMovie}
           />
 
           <ProtectedRoute 
@@ -160,14 +213,12 @@ function App() {
             onEditButton={handleEditProfileClick}
             onMenuPopup={handleOpenMenuPopap}
           />
-
-          <Route path='*'>
+          {/* <Route path="/*">
             <PageNotFound />
-          </Route>
+          </Route> */}
         </Switch>
-
+        {/* <Preloader isOpen={isOpenPreloader} /> */}
         {/* <Footer /> */}
-        {/* <Preloader /> */}
         <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

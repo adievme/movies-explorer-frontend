@@ -7,7 +7,10 @@ function SearchForm({ query, short, updateQuery, movies, updateFilteredMovies, u
     event.preventDefault();
 
     if (query.length) {
-      updateFilteredMovies(movies.filter(movie => movie.nameRU.toLowerCase().indexOf(query.toLowerCase()) >= 0 ))
+      updateFilteredMovies(
+        movies
+          .filter(movie => movie.nameRU.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
+        )
     } else {
       updateFilteredMovies(movies);
     }

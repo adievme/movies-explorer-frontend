@@ -8,8 +8,6 @@ function Register({ onRegister }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const history = useHistory();
   
   const resetForm = () => {
     setName('');
@@ -21,8 +19,6 @@ function Register({ onRegister }) {
     e.preventDefault();
 
     onRegister({ name, email, password })
-
-    history.push("/movies")
 
     resetForm();
   };
