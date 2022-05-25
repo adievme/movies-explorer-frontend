@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import setDurationInString from "../../../utils/setDurationInString"
 import './MoviesCard.css';
 
 function MoviesCard({ movie, onLikeButtonClick, handleDeleteMovie, isSavedMovie }) {
+  const durationString = setDurationInString(movie.duration);
 
   function handleToggleLikeMovie() {
     onLikeButtonClick(movie)
@@ -22,7 +24,7 @@ function MoviesCard({ movie, onLikeButtonClick, handleDeleteMovie, isSavedMovie 
       <div className="element__figure">
         <div className='element__info'>
           <h2 className="element__name">{movie.nameRU}</h2>
-          <p className="element__duration">{movie.duration} мин</p>
+          <p className="element__duration">{durationString}</p>
         </div>
         <div className="element__like-wrapper">
           <button className={CardLikeClassName} onClick={handleToggleLikeMovie} />

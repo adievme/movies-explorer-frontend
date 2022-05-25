@@ -15,8 +15,10 @@ import { authApi } from '../../utils/AuthApi.js';
 import { mainApi } from '../../utils/MainApi.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import EditProfilePopap from '../EditProfilePopap/EditProfilePopap.js';
+import showServerErrorText from '../../utils/showServerErrorText'
+import InfoTooltipPopup from '../InfoToolTipPopup/InfoToolTipPopup';
 
-import Preloader from '../Movies/Preloader/Preloader.js';
+import Preloader from '../Preloader/Preloader.js';
 
 function App() {
   // localStorage.clear()
@@ -28,6 +30,15 @@ function App() {
 
   const [isOpenMenuPopap, setIsOpenMenuPopap] = useState(false);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
+
+  const [isOpenPreloader, setIsOpenPreloader] = React.useState(false);
+  const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+  const [resMessage, setResMessage] = React.useState("");
+
+  function openInfoPopupWithError(errStatus) {
+    setResMessage(showServerErrorText(errStatus));
+    setIsOpenInfoPopup(true);
+  }
 
   function handleTokenCheck() {
     authApi.checkToken(token)
@@ -49,17 +60,20 @@ function App() {
           handleTokenCheck()
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => openInfoPopupWithError(err))
   }
 
   const onRegister = ({ name, email, password }) => {
+    setIsOpenPreloader(true);
+
     authApi.register(name, email, password)
       .then((res) => {
         if (res.statusCode !== 400) {
           onLogin({ email, password });
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => openInfoPopupWithError(err))
+      .finally(() => setIsOpenPreloader(false));
   }
 
   function onLogout() {
@@ -90,23 +104,9 @@ function App() {
         setCurrentUser(res)
         closeAllPopups()
       })
-      .catch(err => console.log(err))
+      .catch((err) => openInfoPopupWithError(err));
   }
   const [savedMovies, setSavedMovies] = useState([])
-
-  // function handleSearchSavedMovies(dataSearch) {
-  //   // setIsOpenPreloader(true);
-
-  //   const savedMoviesInLocalStorage = JSON.parse(localStorage.savedMovies);
-  //   const savedMoviesFilter = filterMovies(
-  //     savedMoviesInLocalStorage,
-  //     dataSearch
-  //   );
-  //   setSavedMovies(savedMoviesFilter);
-  //   setStatusSearchMovies(savedMoviesFilter, setIsSuccessSearchSavedMovie);
-
-  //   setIsOpenPreloader(false);
-  // }
 
 
   function setStatusMovie(dataMovie) {
@@ -131,7 +131,7 @@ function App() {
       .then((newMovie) => {
         setSavedMovies([newMovie, ...savedMovies]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => openInfoPopupWithError(err));
   }
 
   function handleDeleteMovie(movie) {
@@ -140,7 +140,11 @@ function App() {
       .then(() => {
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => openInfoPopupWithError(err));
+  }
+
+  function handleCloseInfoPopup() {
+    setIsOpenInfoPopup(false);
   }
 
   function handleOpenMenuPopap() {
@@ -217,8 +221,13 @@ function App() {
             <PageNotFound />
           </Route> */}
         </Switch>
-        {/* <Preloader isOpen={isOpenPreloader} /> */}
         {/* <Footer /> */}
+        <InfoTooltipPopup
+          isOpen={isOpenInfoPopup}
+          message={resMessage}
+          onClose={handleCloseInfoPopup}
+        />
+        <Preloader isOpen={isOpenPreloader} />
         <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

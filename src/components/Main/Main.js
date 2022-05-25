@@ -8,10 +8,10 @@ import Portfolio from './Portfolio/Portfolio';
 import AboutMe from './AboutMe/AboutMe';
 import Header from '../Header/Header';
 
-function Main({ loggedIn, onMenuPopap }) {
+function Main({ loggedIn, onMenuPopup }) {
   return (
     <main className='main'>
-      <Header loggedIn={loggedIn} onMenuPopup={onMenuPopap} />
+      <Header loggedIn={loggedIn} onMenuPopup={onMenuPopup} />
       <Promo />
       <NavTab />
       <AboutProject />

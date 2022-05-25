@@ -2,7 +2,7 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css';
 import useWindowSize from '../../../hooks/useWindowSize';
-import Preloader from "../Preloader/Preloader";
+// import Preloader from "../../Preloader/Preloader";
 
 function MoviesCardList({ filteredMovies, short, onLikeButtonClick, isSavedMovie }) {
 

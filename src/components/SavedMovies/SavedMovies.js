@@ -4,8 +4,11 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import Footer from '../Footer/Footer.js';
 import Navigation from "../Navigation/Navigation";
 import { mainApi } from "../../utils/MainApi";
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies, onDeleteMovie }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  // console.log(currentUser)
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -14,7 +17,8 @@ function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies
   const updateSavedMovies = (movies) => {
     mainApi.getMovies(token)
       .then(movies => {
-        setSavedMovies(movies);
+        const moviesThisUser = movies.filter(movie => movie.owner === currentUser._id);
+        setSavedMovies(moviesThisUser);
       })
       .catch((err) => console.log(err))
 

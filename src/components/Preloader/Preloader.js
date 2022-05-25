@@ -1,14 +1,14 @@
-import React from "react";
-import "./Preloader.css";
+import React from 'react'
+import './Preloader.css'
 
-const Preloader = ({isVisible}) => {
-  return (
-    <div className={`preloader ${isVisible && "preloader__visible"}`}>
-      <div className="preloader__container">
-        <span className="preloader__round"></span>
-      </div>
-    </div>
-  );
+const Preloader = ({ isOpen }) => {
+    return (
+        <div className={`preloader ${isOpen && "preloader_visible"}`}>
+            <div className="preloader__container">
+                <span className="preloader__round"></span>
+            </div>
+        </div>
+    )
 };
 
-export default Preloader;
+export default Preloader

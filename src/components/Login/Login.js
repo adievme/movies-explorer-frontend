@@ -6,6 +6,7 @@ import './Login.css';
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
 
@@ -18,6 +19,8 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     onLogin({ email, password })
+    
+    resetForm();
   };
 
   return (
@@ -42,6 +45,7 @@ function Login({ onLogin }) {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <span className='auth__signature auth__signature_error'>{errorMessage}</span>
           <button className="auth__button" type="submit">Войти</button>
         </form>
         <p className="auth__caption">Еще не зарегистрированы? <Link className="auth__caption auth__caption_link" to="/signup">Регистрация</Link></p>

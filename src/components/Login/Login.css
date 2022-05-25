@@ -43,7 +43,7 @@
 }
 
 .auth__input_margin {
-  margin: 10px 0 0 0;
+  margin: 10px 0 10px 0;
 }
 
 .auth__button {
@@ -69,6 +69,10 @@
   line-height: 12px;
   font-weight: 400;
   margin: 0;
+}
+
+.auth__signature_error {
+  color: #EE3465;
 }
 
 .auth__caption {
