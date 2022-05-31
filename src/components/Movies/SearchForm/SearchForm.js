@@ -2,17 +2,19 @@ import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ query, short, updateQuery, movies, updateFilteredMovies, updateShort }) {
+function SearchForm({ query, short, updateQuery, movies, updateFilteredMovies, updateShort, setIsOpenPreloader }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setIsOpenPreloader(true)
     if (query.length) {
       updateFilteredMovies(
         movies
           .filter(movie => movie.nameRU.toLowerCase().indexOf(query.toLowerCase()) >= 0 )
         )
+        setIsOpenPreloader(false)
     } else {
       updateFilteredMovies(movies);
+      setIsOpenPreloader(false)
     }
   }
   

@@ -4,7 +4,7 @@ import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 
-function Header({ loggedIn, onMenuPopup }) { 
+function Header({ loggedIn, onMenuPopup, isOpenPreloader }) { 
   const [location, setLocation] = useState('') 
   const pathname = useLocation().pathname;
 
@@ -14,7 +14,7 @@ function Header({ loggedIn, onMenuPopup }) {
 
   if (loggedIn) {
     return (
-      <Navigation loggedIn={loggedIn} onMenuPopup={onMenuPopup} location={location}/>
+      <Navigation loggedIn={loggedIn} onMenuPopup={onMenuPopup} location={location} isOpenPreloader={isOpenPreloader} />
     )
   } else {
     return (      

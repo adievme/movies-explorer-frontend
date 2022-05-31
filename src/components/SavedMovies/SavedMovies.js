@@ -6,9 +6,9 @@ import Navigation from "../Navigation/Navigation";
 import { mainApi } from "../../utils/MainApi";
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
-function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies, onDeleteMovie }) {
+function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies, onDeleteMovie, setIsOpenPreloader }) {
   const currentUser = React.useContext(CurrentUserContext);
-  // console.log(currentUser)
+
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -27,12 +27,10 @@ function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies
 
   const updateMovies = (movies) => {
     setMovies(movies);
-    // localStorage.setItem('movies', JSON.stringify(movies));
   }
 
   const updateFilteredMovies = (movies) => {
     setFilteredMovies(movies);
-    // localStorage.setItem('filteredMovies', JSON.stringify(movies));
   }
 
   const updateQuery = (query) => {
@@ -59,8 +57,6 @@ function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies
     updateFilteredMovies(savedMovies)
   },[savedMovies])
 
-  // console.log(filteredMovies, savedMovies)
-
   return (
     <section className='saved-movies'>
       <Navigation onMenuPopup={onMenuPopup} loggedIn={loggedIn}/>
@@ -71,6 +67,7 @@ function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies
         updateShort={updateShort}
         updateFilteredMovies={updateFilteredMovies}
         movies={movies}
+        setIsOpenPreloader={setIsOpenPreloader}
       />
       <MoviesCardList filteredMovies={filteredMovies} onDeleteMovie={onDeleteMovie} short={short} />
       <Footer />

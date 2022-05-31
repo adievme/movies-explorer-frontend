@@ -7,6 +7,8 @@ import Techs from './Techs/Techs';
 import Portfolio from './Portfolio/Portfolio';
 import AboutMe from './AboutMe/AboutMe';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 
 function Main({ loggedIn, onMenuPopup }) {
   return (
@@ -18,6 +20,7 @@ function Main({ loggedIn, onMenuPopup }) {
       <Techs />
       <AboutMe />
       <Portfolio />
+      <Footer />
     </main>
   );
 }

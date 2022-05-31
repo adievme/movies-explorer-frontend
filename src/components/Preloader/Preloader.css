@@ -40,21 +40,29 @@
 }
 
 .preloader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   z-index: 10;
-  padding: 20px;
   opacity: 0;
   visibility: hidden;
   transition: visibility .4s, opacity .4s;
   position: absolute;
   top:0;
-  right:0;
   left: 0;
-  bottom: 0;
   box-sizing: border-box;
+}
+
+.preloader_margin {
+  margin-top: 18px;
+}
+
+@media screen and (max-width: 520px) {
+  .preloader_center {
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .preloader_visible {
@@ -63,14 +71,14 @@
 }
 
 .preloader__container {
-    width: 100px;
-    height: 100px;
+    width: 42px;
+    height: 42px;
     position: relative;
 }
 
 .preloader__round {
-    width: 100px;
-    height: 100px;
+    width: 42px;
+    height: 42px;
     position: absolute;
     top: 0;
     left: 0;
@@ -81,8 +89,8 @@
 .preloader__round::after,
 .preloader__round::before {
     content: '';
-    width: 100px;
-    height: 100px;
+    width: 42px;
+    height: 42px;
     position: absolute;
     top: 0;
     left: 0;

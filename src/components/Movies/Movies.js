@@ -4,10 +4,9 @@ import SearchForm from "./SearchForm/SearchForm";
 import Footer from '../Footer/Footer.js';
 import Navigation from "../Navigation/Navigation";
 import { moviesApi } from '../../utils/MoviesApi';
+import Header from '../Header/Header';
 
-function Movies({ onMenuPopup, loggedIn, onLikeButtonClick, isSavedMovie }) {
-  // const [isOpenPreloader, setIsOpenPreloader] = useState(false)
-
+function Movies({ onMenuPopup, loggedIn, onLikeButtonClick, isSavedMovie, isOpenPreloader, setIsOpenPreloader }) {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState('');
@@ -44,20 +43,18 @@ function Movies({ onMenuPopup, loggedIn, onLikeButtonClick, isSavedMovie }) {
     updateShort(JSON.parse(localStorage.getItem('short') || 'false'));
 
     if (!movies.length) {
-      // setIsOpenPreloader(true)
       moviesApi.getMovies()
         .then(movies => {
           updateMovies(movies);
           updateFilteredMovies(movies);
         })
-        // .catch((err) => console.log(err))
-        // .finally(() => setIsOpenPreloader(false));
+        .catch((err) => console.log(err))
     } 
   }, [query]);
 
   return (
     <section className='movies'>
-      <Navigation loggedIn={loggedIn} onMenuPopup={onMenuPopup}/>
+      <Header loggedIn={loggedIn} onMenuPopup={onMenuPopup} isOpenPreloader={isOpenPreloader} />
       <SearchForm 
         query={query} 
         short={short} 
@@ -65,6 +62,7 @@ function Movies({ onMenuPopup, loggedIn, onLikeButtonClick, isSavedMovie }) {
         movies={movies}
         updateFilteredMovies = {updateFilteredMovies}
         updateQuery={updateQuery}
+        setIsOpenPreloader={setIsOpenPreloader}
       />
       <MoviesCardList 
         filteredMovies={filteredMovies} 

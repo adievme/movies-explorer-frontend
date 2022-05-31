@@ -2,6 +2,7 @@ import React from 'react';
 import './Profile.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Navigation from '../Navigation/Navigation';
+import Footer from '../Footer/Footer';
 
 function Profile({ onLogout, onEditButton, onMenuPopup, loggedIn }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -26,6 +27,7 @@ function Profile({ onLogout, onEditButton, onMenuPopup, loggedIn }) {
           </div>
         </div>
       </section>
+      <Footer />
     </>
     
   );

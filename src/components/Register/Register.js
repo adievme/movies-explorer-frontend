@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import Preloader from '../Preloader/Preloader';
 import '../Login/Login.css';
 import './Register.css';
 
-function Register({ onRegister }) {
+function Register({ onRegister, errorMessage, isOpen }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const [errorMessage, setErrorMessage] = useState('');
   
   const resetForm = () => {
     setName('');
@@ -27,9 +26,12 @@ function Register({ onRegister }) {
   return (
     <section className="auth">
       <div className="auth__container">
-        <Link to="/">
-          <img className='auth__logo' src={logo} alt='логотип'/>
-        </Link>
+        <div className="auth__logo-container">
+          <Link to="/">
+            <img className={`auth__logo ${isOpen && 'auth__logo_disabled'}`} src={logo} alt='логотип'/>
+            <Preloader isOpen={isOpen}/>
+          </Link>
+        </div>
         <h2 className='auth__title'>Добро пожаловать!</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
           <span className='auth__signature'>Имя</span>

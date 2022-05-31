@@ -1,44 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import Footer from '../Footer/Footer.js';
 import Main from '../Main/Main.js';
-import Login from '../Login/Login.js';
-import Register from '../Register/Register.js';
-import './App.css';
-import Profile from '../Profile/Profile.js';
-import PageNotFound from '../PageNotFound/PageNotFound.js';
 import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js'
+import Profile from '../Profile/Profile.js';
+import { moviesApi } from '../../utils/MoviesApi';
+import filterMovies from '../../utils/filterMovies.js';
+
+import Login from '../Login/Login.js';
+import Register from '../Register/Register.js';
+
+import PageNotFound from '../PageNotFound/PageNotFound.js';
 import MenuPopap from '../MenuPopap/MenuPopap.js';
+import EditProfilePopap from '../EditProfilePopap/EditProfilePopap.js';
+import InfoTooltipPopup from '../InfoToolTipPopup/InfoToolTipPopup';
+// import Preloader from '../Preloader/Preloader.js';
+
+import showServerErrorText from '../../utils/showServerErrorText';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { authApi } from '../../utils/AuthApi.js';
 import { mainApi } from '../../utils/MainApi.js';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import EditProfilePopap from '../EditProfilePopap/EditProfilePopap.js';
-import showServerErrorText from '../../utils/showServerErrorText'
-import InfoTooltipPopup from '../InfoToolTipPopup/InfoToolTipPopup';
 
-import Preloader from '../Preloader/Preloader.js';
+import './App.css';
 
 function App() {
-  // localStorage.clear()
   const history = useHistory()
 
   const [currentUser, setCurrentUser] = useState({})
   const [loggedIn, setLoggedIn] = useState(false);
-  const token = localStorage.getItem('token');
 
   const [isOpenMenuPopap, setIsOpenMenuPopap] = useState(false);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
-
-  const [isOpenPreloader, setIsOpenPreloader] = React.useState(false);
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
-  const [resMessage, setResMessage] = React.useState("");
+  const [isOpenPreloader, setIsOpenPreloader] = React.useState(false);
 
-  function openInfoPopupWithError(errStatus) {
-    setResMessage(showServerErrorText(errStatus));
-    setIsOpenInfoPopup(true);
-  }
+  const [movies, setMovies] = React.useState([]);
+  const [keyWordMovieSearch, setKeyWordMovieSearch] = React.useState("");
+  const [isShortMovieSearch, setIsShortMovieSearch] = React.useState(true);
+
+  // const [, setResMessage] = React.useState("");
+  const [errorMessage, setErrorMessage] = useState('');
+
+
+  const token = localStorage.getItem('token');
 
   function handleTokenCheck() {
     authApi.checkToken(token)
@@ -52,6 +57,8 @@ function App() {
   }
 
   const onLogin = ({ email, password }) => {
+    setIsOpenPreloader(true);
+
     authApi.login(email, password)
       .then((res) => {
         if (res.token) {
@@ -60,7 +67,8 @@ function App() {
           handleTokenCheck()
         }
       })
-      .catch((err) => openInfoPopupWithError(err))
+      .catch((err) => visibleErrorMessage(err))
+      .finally(() => setIsOpenPreloader(false));
   }
 
   const onRegister = ({ name, email, password }) => {
@@ -72,14 +80,15 @@ function App() {
           onLogin({ email, password });
         }
       })
-      .catch((err) => openInfoPopupWithError(err))
+      .catch((err) => visibleErrorMessage(err))
       .finally(() => setIsOpenPreloader(false));
   }
 
   function onLogout() {
     setLoggedIn(false);
     localStorage.clear();
-    history.push("/signin")
+
+    history.push("/")
   }
 
   React.useEffect(() => {
@@ -93,7 +102,7 @@ function App() {
           setCurrentUser(data);
         })
         .catch((err) => console.log(err));
-
+      
       history.push("/movies");
     }
   }, [loggedIn]);
@@ -126,21 +135,34 @@ function App() {
   }
 
   function handleSaveMovie(dataMovie) {
+    setIsOpenPreloader(true)
     mainApi
       .addMovie(dataMovie, token)
       .then((newMovie) => {
         setSavedMovies([newMovie, ...savedMovies]);
       })
-      .catch((err) => openInfoPopupWithError(err));
+      .catch((err) => openInfoPopupWithError(err))
+      .finally(() => setIsOpenPreloader(false));
   }
 
   function handleDeleteMovie(movie) {
+    setIsOpenPreloader(true)
     mainApi
       .deleteMovie(movie._id, token)
       .then(() => {
         setSavedMovies((state) => state.filter((c) => c._id !== movie._id));
       })
-      .catch((err) => openInfoPopupWithError(err));
+      .catch((err) => openInfoPopupWithError(err))
+      .finally(() => setIsOpenPreloader(false));
+  }
+
+  function visibleErrorMessage(errStatus) {
+    setErrorMessage(showServerErrorText(errStatus));
+  }
+
+  function openInfoPopupWithError(errStatus) {
+    setErrorMessage(showServerErrorText(errStatus));
+    setIsOpenInfoPopup(true);
   }
 
   function handleCloseInfoPopup() {
@@ -175,18 +197,18 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <Route exact path='/'>
-          <Main loggedIn={loggedIn} onMenuPopup={handleOpenMenuPopap}/>
+        <Route exact path="/">
+          <Main loggedIn={loggedIn} onMenuPopup={handleOpenMenuPopap} />
         </Route>
 
         <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <Switch>
           <Route path="/signin">
-            <Login onLogin={onLogin}/>
+            <Login onLogin={onLogin} errorMessage={errorMessage} isOpen={isOpenPreloader}/>
           </Route>
 
           <Route path="/signup">
-            <Register onRegister={onRegister} />
+            <Register onRegister={onRegister} errorMessage={errorMessage} isOpen={isOpenPreloader} />
           </Route>
 
           <ProtectedRoute 
@@ -196,6 +218,8 @@ function App() {
             onMenuPopup={handleOpenMenuPopap}
             onLikeButtonClick={toggleLikeMovie}
             isSavedMovie={setStatusMovie}
+            isOpenPreloader={isOpenPreloader}
+            setIsOpenPreloader={setIsOpenPreloader}
           />
 
           <ProtectedRoute 
@@ -207,6 +231,7 @@ function App() {
             setSavedMovies={setSavedMovies}
             token={token}
             onDeleteMovie={handleDeleteMovie}
+            setIsOpenPreloader={setIsOpenPreloader}
           />
 
           <ProtectedRoute 
@@ -217,17 +242,19 @@ function App() {
             onEditButton={handleEditProfileClick}
             onMenuPopup={handleOpenMenuPopap}
           />
-          {/* <Route path="/*">
+
+          <Route path="*">
             <PageNotFound />
-          </Route> */}
+          </Route>
         </Switch>
+          
         {/* <Footer /> */}
         <InfoTooltipPopup
           isOpen={isOpenInfoPopup}
-          message={resMessage}
+          message={errorMessage}
           onClose={handleCloseInfoPopup}
         />
-        <Preloader isOpen={isOpenPreloader} />
+        {/* <Preloader isOpen={isOpenPreloader} /> */}
         <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

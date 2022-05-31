@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import Preloader from '../Preloader/Preloader';
 import './Login.css';
 
-function Login({ onLogin }) {
+function Login({ onLogin, errorMessage, isOpen }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
 
@@ -26,9 +26,12 @@ function Login({ onLogin }) {
   return (
     <section className="auth">
       <div className="auth__container">
-        <Link to="/">
-          <img className='auth__logo' src={logo} alt='логотип'/>
-        </Link>
+        <div className="auth__logo-container">
+          <Link to="/">
+            <img className={`auth__logo ${isOpen && 'auth__logo_disabled'}`} src={logo} alt='логотип'/>
+            <Preloader isOpen={isOpen} isAuthPage={true} />
+          </Link>
+        </div>
         <h2 className='auth__title'>Рады видеть!</h2>
         <form className="auth__form" onSubmit={handleSubmit}>
           <span className='auth__signature'>E-mail</span>
