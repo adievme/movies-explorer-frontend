@@ -4,8 +4,6 @@ import Main from '../Main/Main.js';
 import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js'
 import Profile from '../Profile/Profile.js';
-import { moviesApi } from '../../utils/MoviesApi';
-import filterMovies from '../../utils/filterMovies.js';
 
 import Login from '../Login/Login.js';
 import Register from '../Register/Register.js';
@@ -14,7 +12,6 @@ import PageNotFound from '../PageNotFound/PageNotFound.js';
 import MenuPopap from '../MenuPopap/MenuPopap.js';
 import EditProfilePopap from '../EditProfilePopap/EditProfilePopap.js';
 import InfoTooltipPopup from '../InfoToolTipPopup/InfoToolTipPopup';
-// import Preloader from '../Preloader/Preloader.js';
 
 import showServerErrorText from '../../utils/showServerErrorText';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -35,13 +32,7 @@ function App() {
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [isOpenPreloader, setIsOpenPreloader] = React.useState(false);
 
-  const [movies, setMovies] = React.useState([]);
-  const [keyWordMovieSearch, setKeyWordMovieSearch] = React.useState("");
-  const [isShortMovieSearch, setIsShortMovieSearch] = React.useState(true);
-
-  // const [, setResMessage] = React.useState("");
   const [errorMessage, setErrorMessage] = useState('');
-
 
   const token = localStorage.getItem('token');
 
@@ -248,13 +239,11 @@ function App() {
           </Route>
         </Switch>
           
-        {/* <Footer /> */}
         <InfoTooltipPopup
           isOpen={isOpenInfoPopup}
           message={errorMessage}
           onClose={handleCloseInfoPopup}
         />
-        {/* <Preloader isOpen={isOpenPreloader} /> */}
         <MenuPopap isOpen={isOpenMenuPopap} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

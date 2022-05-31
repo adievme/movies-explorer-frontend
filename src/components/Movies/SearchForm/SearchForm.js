@@ -13,7 +13,7 @@ function SearchForm({ query, short, updateQuery, movies, updateFilteredMovies, u
         )
         setIsOpenPreloader(false)
     } else {
-      updateFilteredMovies(movies);
+      updateFilteredMovies(movies); 
       setIsOpenPreloader(false)
     }
   }
