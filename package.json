@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && scp -r ./build/* adievme@62.84.115.123:/home/adievme/frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
