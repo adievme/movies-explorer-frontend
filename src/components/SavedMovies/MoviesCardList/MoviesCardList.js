@@ -10,6 +10,9 @@ function MoviesCardList({ filteredMovies, onDeleteMovie, short }) {
         .filter(movie => !short || movie.duration <= 40)
         .map(movie => <MoviesCard key={movie.id} movie={movie} onDeleteMovie={onDeleteMovie} />)
       }
+      {filteredMovies.length === 0 && 
+        (<p className="elements__text">Ничего не найдено</p>) 
+      }
       </ul>
     </section>
   );

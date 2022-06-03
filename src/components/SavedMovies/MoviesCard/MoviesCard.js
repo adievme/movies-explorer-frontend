@@ -8,7 +8,6 @@ function MoviesCard({ movie, onDeleteMovie }) {
   function handleDeleteMovie() {
     onDeleteMovie(movie)
   }
-  console.log(movie)
 
   return (
     <li className="element__item">

@@ -2,10 +2,8 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css';
 import useWindowSize from '../../../hooks/useWindowSize';
-// import Preloader from "../../Preloader/Preloader";
 
 function MoviesCardList({ filteredMovies, short, onLikeButtonClick, isSavedMovie }) {
-
   const windowSize = useWindowSize();
 
   const [maxCards, setMaxCards] = React.useState(0);
@@ -25,7 +23,6 @@ function MoviesCardList({ filteredMovies, short, onLikeButtonClick, isSavedMovie
   return (
     <section className="elements">
       <ul className="elements__list">
-        {/* <Preloader isOpen={isOpenPreloader} /> */}
         {filteredMovies
           .filter(movie => !short || movie.duration <= 40)
           .slice(0, maxCardsAfterLoad)
@@ -38,8 +35,11 @@ function MoviesCardList({ filteredMovies, short, onLikeButtonClick, isSavedMovie
             />
           })
         }
+        {filteredMovies.length === 0 && 
+          (<p className="elements__text">Ничего не найдено</p>) 
+        }
       </ul>
-      {filteredMovies.length >= maxCardsAfterLoad && 
+      {filteredMovies.length > maxCardsAfterLoad && 
         (<button className="elements__more" type="button" onClick={handleCardsLoaderClick}>Ещё</button>)
       }
       

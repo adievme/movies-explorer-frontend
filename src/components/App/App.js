@@ -33,19 +33,11 @@ function App() {
   const [isOpenPreloader, setIsOpenPreloader] = React.useState(false);
 
   const [errorMessage, setErrorMessage] = useState('');
+  
+  const [savedMovies, setSavedMovies] = useState([])
 
   const token = localStorage.getItem('token');
-
-  function handleTokenCheck() {
-    authApi.checkToken(token)
-      .then((dataUser) => {
-        if (dataUser) {
-          setCurrentUser(dataUser);
-          setLoggedIn(true);
-        }
-      })
-      .catch((err) => console.log(err));
-  }
+  const location = history.location.pathname;
 
   const onLogin = ({ email, password }) => {
     setIsOpenPreloader(true);
@@ -55,7 +47,9 @@ function App() {
         if (res.token) {
           localStorage.setItem('token', res.token)
           setLoggedIn(true)
-          handleTokenCheck()
+
+          handleTokenCheck();
+          history.push("/movies");
         }
       })
       .catch((err) => visibleErrorMessage(err))
@@ -75,6 +69,17 @@ function App() {
       .finally(() => setIsOpenPreloader(false));
   }
 
+  function handleTokenCheck() {
+    authApi.checkToken(token)
+      .then((dataUser) => {
+        if (dataUser) {
+          setCurrentUser(dataUser);
+          setLoggedIn(true)
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   function onLogout() {
     setLoggedIn(false);
     localStorage.clear();
@@ -82,32 +87,43 @@ function App() {
     history.push("/")
   }
 
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, []);
-
-  React.useEffect(() => {
-    if (loggedIn === true) {
-      mainApi.getUserInfo(token)
-        .then((data) => {
-          setCurrentUser(data);
-        })
-        .catch((err) => console.log(err));
-      
-      history.push("/movies");
+  useEffect(() => {
+    if (token) {
+      handleTokenCheck()
+      if (location === "/signup" || location === "/signin") {
+        history.push("/movies");
+      } else {
+        history.push(location);
+      }
     }
-  }, [loggedIn]);
+  },[loggedIn])
 
   function handleUpdateUser(dataUser) {
     mainApi.setUserInfo(dataUser, token)
       .then((res) => {
         setCurrentUser(res)
+      
         closeAllPopups()
+        visibleErrorMessage(200) // отображаем уведомление об успешном запросе к серверу при сохранении профиля.
       })
-      .catch((err) => openInfoPopupWithError(err));
+      .catch((err) => visibleErrorMessage(err));
   }
-  const [savedMovies, setSavedMovies] = useState([])
 
+  React.useEffect(() => {
+    if (currentUser._id !== undefined) {
+      mainApi
+        .getMovies(token)
+        .then((savedMovies) => {
+
+          const moviesThisUser = savedMovies.filter(movie => movie.owner === currentUser._id);
+          setSavedMovies(moviesThisUser);
+          
+          const savedMoviesJSON = JSON.stringify(moviesThisUser);
+          localStorage.setItem("savedMovies", savedMoviesJSON);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [currentUser]);
 
   function setStatusMovie(dataMovie) {
     const isSavedMovie = savedMovies.some((i) => i.movieId === dataMovie.id);
@@ -171,6 +187,8 @@ function App() {
   function closeAllPopups() {
     setIsOpenMenuPopap(false)
     setIsEditPopupOpen(false)
+
+    setErrorMessage('')
   }
 
   useEffect(() => {
@@ -192,14 +210,19 @@ function App() {
           <Main loggedIn={loggedIn} onMenuPopup={handleOpenMenuPopap} />
         </Route>
 
-        <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        <EditProfilePopap isOpen={isEditPopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
         <Switch>
           <Route path="/signin">
-            <Login onLogin={onLogin} errorMessage={errorMessage} isOpen={isOpenPreloader}/>
+            <Login 
+              onLogin={onLogin} 
+              errorMessage={errorMessage} 
+              setErrorMessage={setErrorMessage} 
+              isOpen={isOpenPreloader}
+            />
           </Route>
 
           <Route path="/signup">
-            <Register onRegister={onRegister} errorMessage={errorMessage} isOpen={isOpenPreloader} />
+            <Register onRegister={onRegister} errorMessage={errorMessage} setErrorMessage={setErrorMessage} isOpen={isOpenPreloader} />
           </Route>
 
           <ProtectedRoute 
@@ -223,6 +246,7 @@ function App() {
             token={token}
             onDeleteMovie={handleDeleteMovie}
             setIsOpenPreloader={setIsOpenPreloader}
+            isOpenPreloader={isOpenPreloader}
           />
 
           <ProtectedRoute 
@@ -232,13 +256,13 @@ function App() {
             onLogout={onLogout}
             onEditButton={handleEditProfileClick}
             onMenuPopup={handleOpenMenuPopap}
+            successfullMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
           />
-
           <Route path="*">
             <PageNotFound />
-          </Route>
-        </Switch>
-          
+          </Route> 
+        </Switch> 
         <InfoTooltipPopup
           isOpen={isOpenInfoPopup}
           message={errorMessage}

@@ -3,27 +3,13 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import Footer from '../Footer/Footer.js';
 import Navigation from "../Navigation/Navigation";
-import { mainApi } from "../../utils/MainApi";
-import { CurrentUserContext } from '../../context/CurrentUserContext';
+import Header from "../Header/Header";
 
-function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies, onDeleteMovie, setIsOpenPreloader }) {
-  const currentUser = React.useContext(CurrentUserContext);
-
+function SavedMovies({ onMenuPopup, loggedIn, savedMovies, onDeleteMovie, setIsOpenPreloader, isOpenPreloader }) {  
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [short, setShort] = useState(false);
-
-  const updateSavedMovies = (movies) => {
-    mainApi.getMovies(token)
-      .then(movies => {
-        const moviesThisUser = movies.filter(movie => movie.owner === currentUser._id);
-        setSavedMovies(moviesThisUser);
-      })
-      .catch((err) => console.log(err))
-
-    localStorage.setItem('savedMovies', JSON.stringify(movies));
-  }
 
   const updateMovies = (movies) => {
     setMovies(movies);
@@ -44,22 +30,20 @@ function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies
   }
 
   useEffect(() => {
-    updateSavedMovies(JSON.parse(localStorage.getItem('savedMovies') || '[]'));
-
     updateQuery(localStorage.getItem('queryForSavedMovies') || '');
 
     updateShort(JSON.parse(localStorage.getItem('shortSavedMovies') || 'false'));
   }, [])
 
   useEffect(() => {
-    
     updateMovies(savedMovies)
     updateFilteredMovies(savedMovies)
   },[savedMovies])
 
   return (
     <section className='saved-movies'>
-      <Navigation onMenuPopup={onMenuPopup} loggedIn={loggedIn}/>
+      {/* <Navigation onMenuPopup={onMenuPopup} loggedIn={loggedIn}/> */}
+      <Header loggedIn={loggedIn} onMenuPopup={onMenuPopup} isOpenPreloader={isOpenPreloader} />
       <SearchForm 
         query={query}
         short={short}
@@ -68,6 +52,7 @@ function SavedMovies({ onMenuPopup, loggedIn, token, savedMovies, setSavedMovies
         updateFilteredMovies={updateFilteredMovies}
         movies={movies}
         setIsOpenPreloader={setIsOpenPreloader}
+        isSavedPage={true}
       />
       <MoviesCardList filteredMovies={filteredMovies} onDeleteMovie={onDeleteMovie} short={short} />
       <Footer />

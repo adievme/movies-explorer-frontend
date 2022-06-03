@@ -44,6 +44,10 @@
   font-weight: 500;
 }
 
+.navigation__link-films:hover {
+  opacity: .7;
+}
+
 .navigation__link-films_weight {
   font-weight: 400;
   margin-left: 16px;
@@ -55,6 +59,10 @@
   text-decoration: none;
   align-items: center;
   justify-content: center;
+}
+
+.navigation__link-account:hover {
+  opacity: .7;
 }
 
 .navigation__account-text {

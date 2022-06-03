@@ -5,10 +5,14 @@ import Preloader from '../Preloader/Preloader';
 import '../Login/Login.css';
 import './Register.css';
 
-function Register({ onRegister, errorMessage, isOpen }) {
+function Register({ onRegister, errorMessage, setErrorMessage, isOpen }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  React.useEffect(() => {
+    setErrorMessage('')
+  },[])
   
   const resetForm = () => {
     setName('');
@@ -40,20 +44,25 @@ function Register({ onRegister, errorMessage, isOpen }) {
             type="text" 
             value={name}
             onChange={e => setName(e.target.value)}
+            required
           />
           <span className='auth__signature'>E-mail</span>
           <input 
             className="auth__input" 
             type="email" 
             value={email}
+            pattern="^([^ ]+@[^ ]+\.[a-z]{2,6}|)$"
             onChange={e => setEmail(e.target.value)}
+            required
           />
           <span className='auth__signature'>Пароль</span>
           <input 
             className="auth__input auth__input_margin" 
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)} 
+            onChange={e => setPassword(e.target.value)}
+            minLength='8' 
+            required
           />
           <span className='auth__signature auth__signature_error'>{errorMessage}</span>
           <button className="auth__button auth__button_register" type="submit">Зарегистрироваться</button>

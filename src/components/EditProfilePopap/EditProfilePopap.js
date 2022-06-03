@@ -3,10 +3,14 @@ import './EditProfilePopap.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 function EditProfilePopap(props) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const currentUser = React.useContext(CurrentUserContext);
+  React.useEffect(() => {
+    props.setErrorMessage('')
+  },[props.isOpen])
 
   function handleChangeName(e) {
     setName(e.target.value)
@@ -25,6 +29,16 @@ function EditProfilePopap(props) {
     })
   }
 
+  const [isValidProfile, setIsValidProfile] = React.useState(false);
+
+  React.useEffect(() => {
+    if (name !== currentUser.name || email !== currentUser.email) {
+      setIsValidProfile(true);
+    } else {
+      setIsValidProfile(false);
+    }
+  }, [name, email, currentUser]);
+
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
@@ -42,29 +56,23 @@ function EditProfilePopap(props) {
             value={name || ''} 
             type="text" 
             placeholder="Имя" 
-            // id="input_name" 
-            // name="name_user" 
             minLength="2" 
             maxLength="40" 
             required 
           />
-          <span className="popup__error" id="input_name_error"></span>
-
           <input 
             className="profile-popap__input" 
             onChange={handleChangeEmail} 
             value={email || ''} 
             type="text" 
             placeholder="Email" 
-            // id="input_job" 
-            // name="info"
             minLength="2" 
             maxLength="200" 
             required 
           />
-          <span className="popup__error" id="input_job_error"></span>
+          <span className='profile-popap__error'>{props.errorMessage}</span>
 
-          <button className='profile-popap__submit'>Сохранить</button>
+          <button className='profile-popap__submit' disabled={!isValidProfile} type="submit">Сохранить</button>
         </form>
       </div>
     </section>

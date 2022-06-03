@@ -4,11 +4,13 @@ import logo from '../../images/logo.svg';
 import Preloader from '../Preloader/Preloader';
 import './Login.css';
 
-function Login({ onLogin, errorMessage, isOpen }) {
+function Login({ onLogin, errorMessage, isOpen, setErrorMessage }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const history = useHistory();
+  React.useEffect(() => {
+    setErrorMessage('')
+  },[])
 
   const resetForm = () => {
     setEmail('');
@@ -40,6 +42,8 @@ function Login({ onLogin, errorMessage, isOpen }) {
             type="email" 
             value={email}
             onChange={e => setEmail(e.target.value)}
+            pattern="^([^ ]+@[^ ]+\.[a-z]{2,6}|)$"
+            required
           />
           <span className='auth__signature'>Пароль</span>
           <input 
@@ -47,6 +51,8 @@ function Login({ onLogin, errorMessage, isOpen }) {
             type="password" 
             value={password}
             onChange={e => setPassword(e.target.value)}
+            minLength='8'
+            required
           />
           <span className='auth__signature auth__signature_error'>{errorMessage}</span>
           <button className="auth__button" type="submit">Войти</button>

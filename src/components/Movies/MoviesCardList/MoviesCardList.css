@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: 118px 70px 80px 70px;
+  position: relative;
 }
 
 .elements__list {
@@ -39,6 +40,19 @@
   display: none;
 }
 
+.elements__text {
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1140px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -2px;
+  color: #424242;  
+}
+
 @media screen and (max-width: 1024px) {
   .elements__list {
     grid-template-columns: repeat(2, 1fr);
@@ -54,6 +68,11 @@
 @media screen and (max-width: 550px) {
   .elements__list {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .elements__text {
+    font-size: 30px;
+    line-height: 38px;
   }
 }
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "./SearchForm/SearchForm";
 import Footer from '../Footer/Footer.js';
-import Navigation from "../Navigation/Navigation";
 import { moviesApi } from '../../utils/MoviesApi';
 import Header from '../Header/Header';
 
@@ -61,6 +60,7 @@ function Movies({ onMenuPopup, loggedIn, onLikeButtonClick, isSavedMovie, isOpen
         updateShort={updateShort} 
         movies={movies}
         updateFilteredMovies = {updateFilteredMovies}
+        filteredMovies={filteredMovies}
         updateQuery={updateQuery}
         setIsOpenPreloader={setIsOpenPreloader}
       />

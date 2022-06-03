@@ -1,4 +1,5 @@
 const errorsFormSubmitText = {
+  ok: "Данные успешно обновлены",
   conflict: "Пользователь с таким email уже существует",
   unauthorized: "Некорректно введены почта или пароль",
   validation: "Переданы некорректные данные",
@@ -9,6 +10,9 @@ const errorsFormSubmitText = {
 export default function showServerErrorText(errorStatus) {
   let errText;
   switch (errorStatus) {
+    case 200:
+      errText = errorsFormSubmitText.ok;
+      break;
     case 409:
       errText = errorsFormSubmitText.conflict;
       break;
